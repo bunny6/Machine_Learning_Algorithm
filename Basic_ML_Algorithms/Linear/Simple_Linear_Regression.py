@@ -1,78 +1,52 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
+#importing the libraries.
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
-# In[3]:
-
+#importing the dataset.
 
 df=pd.read_csv('Salary_Data.csv')
 
 
-# In[5]:
-
-
 df.head(50)
 
-
-# In[6]:
-
+#checking for null values in dataset.
 
 df.isnull().sum()
 
 
-# In[7]:
 
+#Droping the last column and saving other columns in X, and taking the last column as Y.
 
 X=df.drop('Salary',axis=1)
 Y=df[['YearsExperience']]
 
 
-# In[26]:
-
+#Spliting the data in train and test.
 
 from sklearn.model_selection import train_test_split
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.3,random_state=1)
 
 
-# In[27]:
-
+#importing the linear regression.
 
 from sklearn.linear_model import LinearRegression
-
-
-# In[28]:
-
-
 regression=LinearRegression()
 
-
-# In[29]:
-
+#training the model on training dataset.
 
 regression.fit(X_train,Y_train)
 
-
-# In[30]:
-
+#predicting on training dataset.
 
 y_train_pred=regression.predict(X_train)
 
-
-# In[31]:
-
+#predicting on test dataset.
 
 y_test_pred=regression.predict(X_test)
 
-
-# In[32]:
-
+#Plotting the X_train and y_train_pred.
 
 plt.scatter(X_train,Y_train,color="Red")
 plt.plot(X_train,y_train_pred,color="green")
@@ -82,8 +56,7 @@ plt.title("Salary and Experience")
 plt.show()
 
 
-# In[25]:
-
+#plotting the X_test,y_test_pred.
 
 plt.scatter(X_test,Y_test,color="Red")
 plt.plot(X_test,y_test_pred,color="green")
@@ -93,7 +66,6 @@ plt.title("Salary and Experience")
 plt.show()
 
 
-# In[ ]:
 
 
 
