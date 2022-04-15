@@ -1,73 +1,44 @@
-#!/usr/bin/env python
-# coding: utf-8
+#Importing the libraries
 
-# # Principal Component Analysis (PCA)
-
-# ## Importing the libraries
-
-# In[1]:
-
-
-import numpy as np                        #importing libraries.
+import numpy as np                       
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# Importing the dataset
 
-# ## Importing the dataset
-
-# In[2]:
-
-
-dataset = pd.read_csv('Wine.csv')                 #importing the dataset and spliting it.
+dataset = pd.read_csv('Wine.csv')                
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
+#Splitting the dataset into the Training set and Test set.
 
-# ## Splitting the dataset into the Training set and Test set
-
-# In[3]:
-
-
-from sklearn.model_selection import train_test_split       #spliting the data in training and testing.
+from sklearn.model_selection import train_test_split      
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
+#Applying Feature Scaling.
 
-# ## Feature Scaling
-
-# In[4]:
-
-
-from sklearn.preprocessing import StandardScaler   #applying feature scaling.
+from sklearn.preprocessing import StandardScaler  
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
 
-# ## Applying PCA
+#Applying PCA to get lower dimentionality.
 
-# In[5]:
-
-
-from sklearn.decomposition import PCA        #applying pca to get lower dimentionality.
+from sklearn.decomposition import PCA        
 pca = PCA(n_components = 2)                  #n_components means no. of features we want to extract.
 X_train = pca.fit_transform(X_train)
 X_test = pca.transform(X_test)
 
 
-# ## Training the Logistic Regression model on the Training set
+#Training the Logistic Regression model on the Training set.
 
-# In[6]:
-
-
-from sklearn.linear_model import LogisticRegression     #training the model on logistic regression.
+from sklearn.linear_model import LogisticRegression     
 classifier = LogisticRegression(random_state = 0)
 classifier.fit(X_train, y_train)
 
 
-# ## Making the Confusion Matrix
-
-# In[7]:
-
+#Checking the performance of the model by Creating Confusion matrix and printing  accuracy score.
 
 from sklearn.metrics import confusion_matrix, accuracy_score   #checking the performanve of the model.
 y_pred = classifier.predict(X_test)
@@ -76,10 +47,7 @@ print(cm)
 accuracy_score(y_test, y_pred)
 
 
-# ## Visualising the Training set results
-
-# In[8]:
-
+#Visualising the Training set results.
 
 from matplotlib.colors import ListedColormap
 X_set, y_set = X_train, y_train
@@ -99,10 +67,7 @@ plt.legend()
 plt.show()
 
 
-# ## Visualising the Test set results
-
-# In[9]:
-
+#Visualising the Test set results.
 
 from matplotlib.colors import ListedColormap
 X_set, y_set = X_test, y_test
@@ -122,7 +87,6 @@ plt.legend()
 plt.show()
 
 
-# In[ ]:
 
 
 
