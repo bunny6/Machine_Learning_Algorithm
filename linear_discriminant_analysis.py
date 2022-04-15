@@ -1,73 +1,45 @@
-#!/usr/bin/env python
-# coding: utf-8
+#importing neccessary libraries
 
-# # Linear Discriminant Analysis (LDA)
-
-# ## Importing the libraries
-
-# In[1]:
-
-
-import numpy as np                      #importing neccessary libraries
+import numpy as np                      
 import matplotlib.pyplot as plt
 import pandas as pd
 
+#importing dataset and spliting it.
 
-# ## Importing the dataset
-
-# In[2]:
-
-
-dataset = pd.read_csv('Wine.csv')       #importing dataset and spliting it.
+dataset = pd.read_csv('Wine.csv')       
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
 
-# ## Splitting the dataset into the Training set and Test set
-
-# In[3]:
-
+#Splitting the dataset into the Training set and Test set.
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
 
-# ## Feature Scaling
-
-# In[4]:
+#Applying Feature Scaling.
 
 
-from sklearn.preprocessing import StandardScaler          #feature scaling is needed and performed on the dataset.
+from sklearn.preprocessing import StandardScaler         
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
+# Applying LDA
 
-# ## Applying LDA
-
-# In[5]:
-
-
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA   #applying lda on the dataset.
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA   
 lda = LDA(n_components = 2)
 X_train = lda.fit_transform(X_train, y_train)
 X_test = lda.transform(X_test)
 
 
-# ## Training the Logistic Regression model on the Training set
+#Training the Logistic Regression model on the Training set
 
-# In[6]:
-
-
-from sklearn.linear_model import LogisticRegression   #training the model on the training dataset.
+from sklearn.linear_model import LogisticRegression
 classifier = LogisticRegression(random_state = 0)
 classifier.fit(X_train, y_train)
 
-
-# ## Making the Confusion Matrix
-
-# In[7]:
-
+#Checking the performance of the model by Creating Confusion matrix and printing  accuracy score.
 
 from sklearn.metrics import confusion_matrix, accuracy_score   #accuracy metrics.
 y_pred = classifier.predict(X_test)
@@ -76,9 +48,7 @@ print(cm)
 accuracy_score(y_test, y_pred)
 
 
-# ## Visualising the Training set results
-
-# In[8]:
+#Visualising the Training set results
 
 
 from matplotlib.colors import ListedColormap
@@ -99,10 +69,7 @@ plt.legend()
 plt.show()
 
 
-# ## Visualising the Test set results
-
-# In[9]:
-
+#Visualising the Test set results
 
 from matplotlib.colors import ListedColormap
 X_set, y_set = X_test, y_test
@@ -120,9 +87,6 @@ plt.xlabel('LD1')
 plt.ylabel('LD2')
 plt.legend()
 plt.show()
-
-
-# In[ ]:
 
 
 
