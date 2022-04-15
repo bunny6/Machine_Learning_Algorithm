@@ -1,14 +1,5 @@
 #importing the libraries.
 
-
-
-
-
-#training the model on training dataset.
-#predicting on test dataset.
-#Printing the actual and the predicted data side by side.
-#Checking the performance of the model by Creating Confusion matrix and printing  accuracy score.
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -63,8 +54,6 @@ from sklearn.metrics import r2_score
 
 r2_score(Y_test,y_pred)
 
-
-y_pred.shape
 
 
 
