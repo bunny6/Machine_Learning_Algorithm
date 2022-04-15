@@ -1,18 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # importing the Libraries
-
-# In[ ]:
-
+#importing the Libraries
 
 import numpy as np
 import pandas as pd
-
-
-# In[2]:
-
-
 from nltk.corpus import PlaintextCorpusReader
 import re
 import nltk
@@ -26,70 +15,29 @@ import string
 import matplotlib.pyplot as plt
 
 
-# # business corpus
-
-# In[4]:
-
-
+#creating business corpus by giving the path and reading it.
 
 corpus_root1 = '/home/neosoft/Downloads/NLP/document_classification/bbc_fulltext_document_classification/bbc/business'
 
-#business folder path
-
-
-# In[5]:
-
-
 filelists = PlaintextCorpusReader(corpus_root1, '.*')
+
 #read all the text files in business folder
-
-
-# In[6]:
-
-
 a=filelists.fileids()
-
-
-# In[7]:
 
 
 wordslist = filelists.words('510.txt')
 
-
-# In[8]:
-
-
 print(wordslist)
-
-
-# In[9]:
-
 
 print(a)
 
-
-# In[10]:
-
-
 businessCorpus=[]
-
-
-# In[11]:
-
 
 for file in a:
   wordslist = filelists.words(file) #Read all the words in the each text file iterating through the loop
   businessCorpus.append(wordslist)
 
-
-# In[12]:
-
-
 print(businessCorpus)
-
-
-# In[14]:
-
 
 Bcorpus=[]
 for item in businessCorpus:
@@ -104,15 +52,9 @@ for item in businessCorpus:
     Bcorpus.append(new)   
 
 
-# In[15]:
-
-
 print(Bcorpus) 
+
 #business corpus array after removing stopwords and cnverting to lower case and applying lemmatization
-
-
-# In[161]:
-
 
 Bcorpus1=[]
 for i in Bcorpus:
@@ -126,24 +68,13 @@ for i in Bcorpus:
       
     Bcorpus1.append(new)    
       
-
-
-# In[162]:
-
-
 print(Bcorpus1)
+
 #Business array after removing the empty values
 
-
-# In[18]:
-
-
-print(Bcorpus1[0])
-
-
-# In[20]:
-
-
+print(Bcorpus1[0]
+      
+      
 Bcorpus2=[]
 for i in Bcorpus1:
     Bcorpus2.append(" ".join(i))
@@ -153,61 +84,37 @@ for i in Bcorpus1:
 
 
 print(Bcorpus2) 
+
 #Business list after converting the words after doing limatization and finding unique words into string in each document
 
 
-# In[22]:
-
-
 df1=pd.DataFrame({'page':Bcorpus2,'class':"Business"})
+
 #Business Class DataFrame
-
-
-# In[23]:
-
 
 df1["Text"]=Bcorpus1
 print(df1)
+      
+      
 #added new column in the business Dataframe which contains the list of Bag of words created
 
 
-# # Entertainment
-
-# In[24]:
-
+#Now doing same process for Entertainment
 
 
 corpus_root1 = 'document_classification/bbc_fulltext_document_classification/bbc/entertainment'
+
 #path of Entertainment Folder
-
-
-# In[25]:
-
 
 filelists = PlaintextCorpusReader(corpus_root1, '.*')
 
-
-# In[26]:
-
-
 a=filelists.fileids()
+      
 #list containing all the text files from Entertainment Folder
-
-
-# In[27]:
-
 
 print(a)
 
-
-# In[28]:
-
-
 entertainmentCorpus=[]
-
-
-# In[29]:
-
 
 for file in a:
     wordslist = filelists.words(file)
@@ -215,20 +122,9 @@ for file in a:
     entertainmentCorpus.append(wordslist)
 
 
-# In[30]:
-
-
 print(entertainmentCorpus)
 
-
-# In[31]:
-
-
 print(entertainmentCorpus)
-
-
-# In[163]:
-
 
 Ecorpus=[]
 for item in entertainmentCorpus:
@@ -242,14 +138,9 @@ for item in entertainmentCorpus:
     Ecorpus.append(new)   
 
 
-# In[164]:
+print(Ecorpus) 
 
-
-print(Ecorpus) #Entertainment Array after applying lemmatization,changing tom lower case,replacing punctuations.
-
-
-# In[165]:
-
+#Entertainment Array after applying lemmatization,changing tom lower case,replacing punctuations.
 
 Ecorpus1=[]
 for i in Ecorpus:
@@ -263,84 +154,49 @@ for i in Ecorpus:
 
     Ecorpus1.append(new)    
 
-
-# In[166]:
-
-
 print(Ecorpus1) #Entertainment Array after removing null elements and unique words
 
-
-# In[36]:
-
-
 print(Ecorpus1[0])
-
-
-# In[37]:
 
 
 Ecorpus2=[]
 for i in Ecorpus1:
     Ecorpus2.append(" ".join(i))
 
-
-# In[38]:
-
-
-print(Ecorpus2) # Entertainment Array after making all words in each text file to string.
-
-
-# In[167]:
-
-
-df2=pd.DataFrame({'page':Ecorpus2,'class':"Entertainment"})
+# Entertainment Array after making all words in each text file to string.
+      
+print(Ecorpus2) 
+      
 #Entertainment Data Frame
+      
+df2=pd.DataFrame({'page':Ecorpus2,'class':"Entertainment"})
 
-
-# In[168]:
-
+#Added new column which has the Bagwords as rows
 
 df2["Text"]=Ecorpus1
-#Added new column which has the Bagwords as rows
+
 print(df2)
 
 
-# # politics
+#politics
 
-# In[41]:
-
-
-
-corpus_root1 = 'document_classification/bbc_fulltext_document_classification/bbc/politics'
 #Politics Folder Path
+corpus_root1 = 'document_classification/bbc_fulltext_document_classification/bbc/politics'
 
-
-# In[42]:
 
 
 filelists = PlaintextCorpusReader(corpus_root1, '.*')
 
 
-# In[43]:
-
-
-a=filelists.fileids()
 #Read all the text files in the entertainment Folder
 
 
-# In[44]:
-
+a=filelists.fileids()
 
 print(a)
 
 
-# In[45]:
-
-
 politicsCorpus=[]
-
-
-# In[46]:
 
 
 for file in a:
@@ -349,14 +205,7 @@ for file in a:
     politicsCorpus.append(wordslist)
 
 
-# In[48]:
-
-
 print(politicsCorpus)
-
-
-# In[169]:
-
 
 Pcorpus=[]
 for item in politicsCorpus:
@@ -370,14 +219,9 @@ for item in politicsCorpus:
     Pcorpus.append(new)   
 
 
-# In[50]:
-
-
-print(Pcorpus) #Politics Array after applying Lemmatization and removing stopwords
-
-
-# In[171]:
-
+#Politics Array after applying Lemmatization and removing stopwords
+      
+print(Pcorpus) 
 
 Pcorpus1=[]
 for i in Pcorpus:
@@ -391,86 +235,43 @@ for i in Pcorpus:
       
     Pcorpus1.append(new)    
       
-
-
-# In[52]:
-
-
-print(Pcorpus1) #Politics Array after removing empty elements and finding the unique words
-
-
-# In[53]:
-
+#Politics Array after removing empty elements and finding the unique words
+print(Pcorpus1) 
 
 print(Pcorpus1[0])
-
-
-# In[54]:
-
 
 Pcorpus2=[]
 for i in Pcorpus1:
     Pcorpus2.append(" ".join(i))
 
+#Politics Array after joining the words in each text file to form a string
+      
+print(Pcorpus2)
 
-# In[55]:
-
-
-print(Pcorpus2)#Politics Array after joining the words in each text file to form a string
-
-
-# In[56]:
-
-
+#Data frame for Politics      
 df3=pd.DataFrame({'page':Pcorpus2,'class':"Politics"})
-#Data frame for Politics
 
-
-# In[57]:
-
-
-df3["Text"]=Pcorpus1
 #added new column to Politics DataFrame which has bag of words of each text file
+      
+df3["Text"]=Pcorpus1
+
 print(df3)
 
 
-# # Sport
+#Sport
 
-# In[58]:
-
-
-
+      #sport folder Path
 corpus_root1 = 'document_classification/bbc_fulltext_document_classification/bbc/sport'
-#sport folder Path
-
-
-# In[59]:
-
 
 filelists = PlaintextCorpusReader(corpus_root1, '.*')
 
-
-# In[172]:
-
-
-a=filelists.fileids()
 #list Containg all the text files of Sport Folder
 
-
-# In[173]:
-
+a=filelists.fileids()
 
 print(a)
 
-
-# In[62]:
-
-
 sportsCorpus=[]
-
-
-# In[63]:
-
 
 import codecs
 new=[]
@@ -485,42 +286,22 @@ for file in a:
     
 print(new)
 
-
-# In[174]:
-
-
 new1=[]
 for i in new:
     a=' '.join(i)
    
     new1.append(a)
     
-  
-
-
-# In[65]:
-
-
-print(new1)
 #Joined each word in the file to form a string in Sports Array
-
-
-# In[66]:
-
-
-
+  
+print(new1)
+      
+# done tonenization for each file in Sports Array
+      
 for i in new1:
     sportsCorpus.append(i.split())
     
-
-
-# In[67]:
-
-
-print(sportsCorpus)# done toneization for each file in Sports Array
-
-
-# In[175]:
+print(sportsCorpus)
 
 
 Scorpus=[]
@@ -535,13 +316,8 @@ for item in sportsCorpus:
     Scorpus.append(new)   
 
 
-# In[69]:
-
-
 print(Scorpus) #sports Array after removing stopwords ,converting to lower case words
 
-
-# In[70]:
 
 
 Scorpus1=[]
@@ -557,16 +333,7 @@ for i in Scorpus:
     Scorpus1.append(new)    
        
       
-        
-
-
-# In[71]:
-
-
-print(Scorpus1) #sports array after removing the empty elements and finding the unique words
-
-
-# In[72]:
+ print(Scorpus1) #sports array after removing the empty elements and finding the unique words
 
 
 Scorpus2=[]
@@ -574,84 +341,39 @@ for i in Scorpus1:
     Scorpus2.append(" ".join(i))
 
 
-# In[73]:
-
-
 print(Scorpus2) #sports array after making string of words from each file 
 
-
-# In[74]:
-
-
-df4=pd.DataFrame({'page':Scorpus2,'class':"Sport"})
 #data frame for sports class
+      
+df4=pd.DataFrame({'page':Scorpus2,'class':"Sport"})
 
-
-# In[75]:
-
-
-
-df4["Text"]=Scorpus1
 #added new column containing the list of words of each text file
+df4["Text"]=Scorpus1
+
 print(df4)
 
 
-# # Tech
+#Tech
 
-# In[76]:
-
-
-
-corpus_root1 = 'document_classification/bbc_fulltext_document_classification/bbc/tech'
 #Tech Folder path
-
-
-# In[77]:
-
+corpus_root1 = 'document_classification/bbc_fulltext_document_classification/bbc/tech'
 
 filelists = PlaintextCorpusReader(corpus_root1, '.*')
 
-
-# In[78]:
-
-
-a=filelists.fileids()
 #list containing all the files of tech folder
-
-
-# In[79]:
-
+a=filelists.fileids()
 
 print(a)
 
-
-# In[80]:
-
-
 techCorpus=[]
-
-
-# In[81]:
-
 
 for file in a:
     wordslist = filelists.words(file) #read all the words from each file of tech folder
     techCorpus.append(wordslist)
 
-
-# In[82]:
-
-
 print(techCorpus)
 
-
-# In[83]:
-
-
 print(techCorpus)
-
-
-# In[176]:
 
 
 Tcorpus=[]
@@ -666,13 +388,8 @@ for item in techCorpus:
     Tcorpus.append(new)   
 
 
-# In[177]:
-
 
 print(Tcorpus) #Tech array after removing stopwords and doing lemmatization 
-
-
-# In[86]:
 
 
 Tcorpus1=[]
@@ -687,81 +404,45 @@ for i in Tcorpus:
 
     Tcorpus1.append(new)    
       
+#Tech array after removing empty elements and duplicates
 
-
-# In[87]:
-
-
-print(Tcorpus1) #Tech array after removing empty elements and duplicates
-
-
-# In[88]:
-
+print(Tcorpus1) 
 
 print(Tcorpus1[0])
-
-
-# In[89]:
 
 
 Tcorpus2=[]
 for i in Tcorpus1:
     Tcorpus2.append(" ".join(i))
 
-
-# In[90]:
-
-
-print(Tcorpus2) # tech array after joing the list elements of each file in tech folder
+# tech array after joing the list elements of each file in tech folder
+      
+print(Tcorpus2) 
 
 
-# In[91]:
 
 
-df5=pd.DataFrame({'page':Tcorpus2,'class':"Tech"})
 #Dataframe for Tech 
-df5["Text"]=Tcorpus1
+df5=pd.DataFrame({'page':Tcorpus2,'class':"Tech"})
+
 #added new column in Tech dataframe 
-
-
-# In[92]:
-
+df5["Text"]=Tcorpus1
 
 print(df5)
 
-
-# In[124]:
-
-
-DF=pd.concat((df1,df2,df3,df4,df5))
 #dataframe after concatenating all the dataframes tech,sport,entertainment,politics and business
-
-
-# In[125]:
-
+      
+DF=pd.concat((df1,df2,df3,df4,df5))
 
 print(DF)
-
-
-# In[126]:
-
-
-DF = DF.rename(columns={'page': 'page', 'class': 'category'})
+      
 #renamed column in dataframe
-
-
-# In[127]:
-
+DF = DF.rename(columns={'page': 'page', 'class': 'category'})
 
 print(DF)
-
-
-# # tfidf vectorizor
-
-# In[128]:
-
 
 #applied tfidf vectorizor
+      
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorizer = TfidfVectorizer(input='content', analyzer = 'word', lowercase=True, stop_words='english',                                   ngram_range=(1, 3), min_df=40, max_df=0.20,                                  norm='l2', use_idf=True, smooth_idf=True, sublinear_tf=True)
 text_vector = vectorizer.fit_transform(DF.page)
@@ -769,11 +450,7 @@ dtm = text_vector.toarray()
 features = vectorizer.get_feature_names()
 
 
-# # Label Encoding
-
-# In[129]:
-
-
+#Label Encoding
 
 from sklearn.preprocessing import LabelEncoder
 label_enc = LabelEncoder()
@@ -781,41 +458,14 @@ DF['label'] = label_enc.fit_transform(DF['category'])
 DF.tail()
 
 
-# In[130]:
-
 
 DF[DF['label']==3]
-
-
-# In[131]:
-
 
 print(text_vector)
 
 
-# In[132]:
-
-
 h = pd.DataFrame(data = text_vector.todense(), columns = vectorizer.get_feature_names())
 h.iloc[:,:]
-
-
-# In[133]:
-
-
-pip install -U gensim
-
-
-# In[134]:
-
-
-from gensim.corpora import Dictionary
-# dictionary = Dictionary(DF['Text'])
-# corpus = [dictionary.doc2bow(txt) for txt in DF["Text"]]
-
-
-# In[135]:
-
 
 dictionary = Dictionary(DF['Text'])
 print('Nr. of unique words in initital documents:', len(dictionary))
@@ -825,66 +475,29 @@ dictionary.filter_extremes(no_below=10, no_above=0.2)
 print('Nr. of unique words after removing rare and common words:', len(dictionary))
 
 
-# In[159]:
-
-
-
 print(dictionary)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[151]:
-
 
 X = text_vector
 y = DF.label.values
 
 
-# In[152]:
-
-
 DF[DF["label"]==0]
 
-
-# # splitting the data into train and test
-
-# In[153]:
-
+#splitting the data into train and test
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, random_state = 0)
-
-
-# In[154]:
 
 
 print(X_train)
 print(y_train)
 
 
-# # Model Training
+#Model Training
 
-# ## Random Forest
-
-# In[155]:
-
+#Random Forest
 
 from sklearn.ensemble import RandomForestClassifier
-
-
-# In[156]:
-
 
 svc1 = RandomForestClassifier(random_state = 0)
 svc1.fit(X_train, y_train)
@@ -893,16 +506,9 @@ svc1_pred = svc1.predict(X_test)
 print(f"Test Accuracy: {svc1.score(X_test, y_test)*100:.3f}%")
 
 
-# # K Neighbours
-
-# In[157]:
-
+#K Neighbours
 
 from sklearn.neighbors import KNeighborsClassifier
-
-
-# In[158]:
-
 
 svc4 = KNeighborsClassifier()
 #pprint(svc4.get_params())
@@ -912,13 +518,6 @@ svc4_pred = svc4.predict(X_test)
 print(f"Test Accuracy: {svc4.score(X_test, y_test)*100:.3f}%")
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
