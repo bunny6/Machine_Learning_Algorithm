@@ -12,6 +12,8 @@ Y=df.iloc[:,-1].values
 
 df.head()
 
+#Spliting the data in train and test.
+
 from sklearn.model_selection import train_test_split
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.25,random_state=1)
 
@@ -38,10 +40,10 @@ Y_test_pred=lr.predict(X_test)
 #Printing the actual and the predicted data side by side.
 print(np.concatenate((Y_test_pred.reshape(len(Y_test_pred),1),Y_test.reshape(len(Y_test),1)),1))
 
-#Checking the performance of the model.
+#Importing performance metrics.
 from sklearn.metrics import confusion_matrix,accuracy_score
 
-#Creating Confusion matrix and printing  accuracy score.
+#Checking the performance of the model by Creating Confusion matrix and printing  accuracy score.
 cm=confusion_matrix(Y_test,Y_test_pred)
 print(cm)
 accuracy_score(Y_test,Y_test_pred)
