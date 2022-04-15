@@ -1,21 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
+#importing the necessary librarie
 
-# In[1]:
-
-
-import numpy as np                        #importing the necessary libraries
+import numpy as np                       s
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
-# In[2]:
-
-
-df=pd.read_csv("Restaurant_Reviews.tsv",delimiter='\t',quoting=3) #importing the tsv file. Delimiter is telling that we are import a tsv file and quoting=3 means ignore ''.
-
-
-# In[3]:
+ #importing the tsv file. Delimiter is telling that we are import a tsv file and quoting=3 means ignore ''.
+df=pd.read_csv("Restaurant_Reviews.tsv",delimiter='\t',quoting=3)
 
 
 import re                                 #import re=regular expression
@@ -36,13 +26,11 @@ for i in range(0,1000):                   #applying for loop for each comment sh
     corpus.append(review)                  #appending the words in corpus list which we have created.
 
 
-# In[4]:
 
 
-print(corpus)                  #printing the corpus
+#printing the corpus
+print(corpus)                  
 
-
-# In[5]:
 
 
 from sklearn.feature_extraction.text import CountVectorizer    #to convert the textual data into numerical format, we use Vectorization.
@@ -51,47 +39,36 @@ X=cv.fit_transform(corpus).toarray()                           #fit will take al
 y=df.iloc[:,-1].values                                         #fetching the last column.
 
 
-# In[6]:
 
-
-from sklearn.model_selection import train_test_split            #split the data into training and testing.
+ #split the data into training and testing.
+    
+from sklearn.model_selection import train_test_split           
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 0)
 
+#naive bayes is one of the best algo for text analysis. Thats why we used here.
 
-# In[7]:
-
-
-from sklearn.naive_bayes import GaussianNB  #naive bayes is one of the best algo for text analysis. Thats why we used here.
+from sklearn.naive_bayes import GaussianNB  
 classifier = GaussianNB()
 classifier.fit(X_train, y_train)
 
+#predicting the results and printing the results side by side.
 
-# In[8]:
-
-
-y_pred = classifier.predict(X_test)  #predicting the results and printing the results side by side.
+y_pred = classifier.predict(X_test)  
 print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
 
 
-# In[9]:
-
-
-from sklearn.metrics import confusion_matrix, accuracy_score   #importing the accuracy metrics.
-cm = confusion_matrix(y_test, y_pred)                          #printing the confusion matrix.
+##importing the accuracy metrics and printing the confusion matrix and the accuracy.
+from sklearn.metrics import confusion_matrix, accuracy_score   
+cm = confusion_matrix(y_test, y_pred)                          
 print(cm)
 accuracy_score(y_test, y_pred)
 
+#getting the performace of the model.
 
-# In[10]:
-
-
-from sklearn.metrics import accuracy_score    #getting the performace of the model.
+from sklearn.metrics import accuracy_score    
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
-
-
-# In[12]:
 
 
 acc=accuracy_score(y_test,classifier.predict(X_test))
@@ -104,7 +81,7 @@ print(pre)
 print(f1)
 
 
-# In[ ]:
+
 
 
 
