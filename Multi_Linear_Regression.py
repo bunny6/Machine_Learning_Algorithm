@@ -49,9 +49,16 @@ print(np.concatenate((Y_train_pred.reshape(len(Y_train_pred),1), Y_train.reshape
 
 y_test_pred = lr.predict(X_test)
 
-##Checking the performance of the model by Creating Confusion matrix and printing  accuracy score
-np.set_printoptions(precision=2)
+
+#Printing the actual and the predicted data side by side.
+
 print(np.concatenate((y_test_pred.reshape(len(y_test_pred),1), Y_test.reshape(len(Y_test),1)),1))
+
+#Checking the performance of the model by Creating Confusion matrix and printing  accuracy score
+
+from sklearn.metrics import r2_score
+r2_score(Y_test,y_test_pred)
+
 
 
 
