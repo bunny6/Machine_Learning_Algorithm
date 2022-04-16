@@ -40,7 +40,6 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-
 # Initializing the ANN
 ann = tf.keras.models.Sequential()
 
@@ -59,7 +58,6 @@ ann.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accura
 # Training the ANN on the Training set.
 ann.fit(X_train, y_train, batch_size = 32, epochs = 100)
 
-# Making the predictions and evaluating the model.
 
 #Predicting on Test set results.
 y_pred = ann.predict(X_test)
